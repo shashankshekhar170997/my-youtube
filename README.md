@@ -1,1 +1,9 @@
-Started with npx create-react-app my-youtube
+- Started with npx create-react-app my-youtube
+- Head
+- Body
+  - sidebar
+    -- MenuItems
+  - MainContainer
+    --ButtonList
+    -- VideoContainer
+    ----videoCard
