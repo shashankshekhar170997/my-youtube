@@ -17,11 +17,13 @@ const Header = () => {
           alt="menu"
           src="https://cdn.iconscout.com/icon/free/png-256/free-hamburger-menu-462145.png?f=webp"
         />
-        <img
-          className="h-8 mx-2"
-          alt="youtube-logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
-        />
+        <a href="/">
+          <img
+            className="h-8 mx-2"
+            alt="youtube-logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
+          />
+        </a>
       </div>
       <div className="col-span-10 px-10">
         <input

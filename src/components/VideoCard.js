@@ -1,7 +1,7 @@
 import React from "react";
 
 const VideoCard = ({ info }) => {
-  console.log(info);
+  //   console.log(info);
   //   Nullish coalescing operator(??) - operator is a logical operator that returns its right-hand side operand when its left-hand side operand is null or undefined, and otherwise returns its left-hand side operand.
   const { snippet, statistics } = info ?? {};
   const { channelTitle, title, thumbnails } = snippet ?? {};
