@@ -1,8 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../Redux/appSlice";
+import { YOUTUBE_SEARCH_API } from "../utils/constant";
 
 const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestion, setShowSuggestion] = useState(false);
+  // console.log(searchQuery);
+
+  useEffect(() => {
+    // make an api call after every key press, but if the difference b\w 2 APIs call is < 200ms then decline the API call.
+    const timer = setTimeout(() => {
+      getSearchSuggestions();
+    }, 200);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  const getSearchSuggestions = async () => {
+    console.log(searchQuery);
+
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    // console.log(json[1]);
+    setSuggestions(json[1]);
+  };
+
   // action dispatch
   const dispatch = useDispatch();
   const toggleMenuhandler = () => {
@@ -26,13 +51,30 @@ const Header = () => {
         </a>
       </div>
       <div className="col-span-10 px-10">
-        <input
-          type="text"
-          className="w-1/2 border border-gray-400 p-2 rounded-l-full"
-        />
-        <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100">
-          Search
-        </button>
+        <div>
+          <input
+            type="text"
+            className="w-1/2 border border-gray-400 p-2 rounded-l-full"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setShowSuggestion(true)}
+            onBlur={() => setShowSuggestion(false)}
+          />
+          <button className="border border-gray-400 p-2 rounded-r-full bg-gray-100">
+            Search
+          </button>
+        </div>
+        {showSuggestion && (
+          <div className="absolute bg-white py-2 px-5 w-[32rem] shadow-lg rounded-lg border border-gray-100">
+            <ul>
+              {suggestions.map((Suggest) => (
+                <li key={Suggest} className="py-2 shadow-sm hover:bg-gray-100">
+                  {Suggest}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="col-span-1">
         <img
@@ -44,5 +86,4 @@ const Header = () => {
     </div>
   );
 };
-
 export default Header;
