@@ -6,6 +6,8 @@ import store from "./Redux/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import MainContainer from "./components/MainContainer";
 import WatchPage from "./components/WatchPage";
+import Dwmo from "./components/Dwmo";
+import Demo1 from "./components/Demo1";
 function App() {
   const appRouter = createBrowserRouter([
     {
@@ -19,6 +21,14 @@ function App() {
         {
           path: "watch",
           element: <WatchPage />,
+        },
+        {
+          path: "Demo",
+          element: (
+            <>
+              <Dwmo /> <Demo1 />
+            </>
+          ),
         },
       ],
     },
